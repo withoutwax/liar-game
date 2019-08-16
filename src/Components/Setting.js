@@ -1,5 +1,6 @@
 import React from 'react';
 import '../scss/Setting.scss';
+import { Link } from 'react-router-dom';
 
 class Setting extends React.Component {
     constructor(props) {
@@ -30,6 +31,10 @@ class Setting extends React.Component {
     }
 
     render() {
+        
+        // Display 게임 시작! button when the user chooses the theme.
+        let startGameButton = this.state.theme !== "" ? (<Link to='/game'>게임시작!</Link>) : ``;
+
         return (
             <section className="setting-container">
                 <h1>설정 창</h1>
@@ -65,6 +70,9 @@ class Setting extends React.Component {
                     <button value="place" onClick={this.setTheme}>장소</button>
                     <button value="occupation" onClick={this.setTheme}>직업</button>
                 </div>
+
+                {startGameButton}
+                
             </section>
             );
     }
