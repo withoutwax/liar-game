@@ -4,7 +4,7 @@ import Intro from './Components/Intro';
 import Setting from './Components/Setting';
 
 function App() {
-  const [introduction, gameStart] = useState(true);
+  const [introduction, gameStart] = useState(false); // For debug purposes, you can turn this to false
 
   if (introduction) {
     return (
