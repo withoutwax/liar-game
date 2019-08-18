@@ -14,6 +14,7 @@ class Setting extends React.Component {
 
     selectMenuChange = (event) => {
         this.setState({playerNum: event.target.value});
+        this.props.parentCallbackPlayerNum(event.target.value);
         console.log(event.target.value, this.state.playerNum);
     }
     spyModeSelect = (event) => {

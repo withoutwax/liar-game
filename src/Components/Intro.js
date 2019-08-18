@@ -3,7 +3,7 @@ import "../scss/Intro.scss";
 
 import  { Link } from 'react-router-dom';
 
-function Intro({ match }) {
+function Intro() {
     return (
         <section className="intro-container">
             <h1>Liar Game</h1>
