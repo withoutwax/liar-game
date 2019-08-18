@@ -10,7 +10,8 @@ class Game extends React.Component {
             theme: "",
             vocab: "",
             liar: 1,
-            buttonDisabled: []
+            buttonDisabled: [],
+            displayScreen: ""
         }
     }
 
@@ -59,6 +60,14 @@ class Game extends React.Component {
             });
         }
 
+        let card = event.target.className;
+        
+        if (card.includes("no-liar")) {
+            this.setState({displayScreen: `당신은 라이어가 아닙니다. 이번에 선택된 단어는: ${this.state.vocab}`})
+        } else {
+            this.setState({displayScreen: `당신은 라이어입니다.`})
+        }
+
         console.log("THIS.STATE", this.state);
     }
 
@@ -79,6 +88,7 @@ class Game extends React.Component {
         return (
             <div>
                 <h1>게임화면</h1>
+                <div>{this.state.displayScreen}</div>
                 { playersCard }
             </div>
         );
