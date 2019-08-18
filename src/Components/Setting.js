@@ -6,15 +6,14 @@ class Setting extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            playerNum: "3",
+            playerNum: 3,
             spyMode: false,
             theme: ""
         }
     }
 
     selectMenuChange = (event) => {
-        this.setState({playerNum: event.target.value});
-        console.log(event.target.value, this.state.playerNum);
+        this.setState({playerNum: Number(event.target.value)});
     }
     spyModeSelect = (event) => {
         // console.log(this.state.spyMode);
@@ -30,10 +29,14 @@ class Setting extends React.Component {
         this.setState({theme: event.target.value});
     }
 
+    updateGlobalState = () => {
+        this.props.parentCallbackState(this.state);
+    }
+
     render() {
         
         // Display 게임 시작! button when the user chooses the theme.
-        let startGameButton = this.state.theme !== "" ? (<Link to='/game'>게임시작!</Link>) : ``;
+        let startGameButton = this.state.theme !== "" ? (<Link to='/game' onClick={this.updateGlobalState}>게임시작!</Link>) : ``;
 
         return (
             <section className="setting-container">
@@ -42,7 +45,7 @@ class Setting extends React.Component {
                 <form>
                     <label>
                         참여인원: {this.state.playerNum}
-                        <select value={this.state.value} onChange={this.selectMenuChange}>
+                        <select value={this.state.value}>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
