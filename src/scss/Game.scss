@@ -1,0 +1,10 @@
+.playersCard {
+    border: 1px solid red;
+    cursor: pointer;
+    padding: 20px;
+
+    &.disable {
+        cursor: initial;
+        border: 1px solid yellow;
+    }
+}

@@ -6,14 +6,14 @@ class Setting extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            playerNum: "3",
+            playerNum: 3,
             spyMode: false,
             theme: ""
         }
     }
 
     selectMenuChange = (event) => {
-        this.setState({playerNum: event.target.value});
+        this.setState({playerNum: Number(event.target.value)});
     }
     spyModeSelect = (event) => {
         // console.log(this.state.spyMode);
@@ -28,7 +28,7 @@ class Setting extends React.Component {
         console.log(event.target.value);
         this.setState({theme: event.target.value});
     }
-    
+
     updateGlobalState = () => {
         this.props.parentCallbackState(this.state);
     }

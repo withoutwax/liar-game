@@ -10,7 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      playerNum: "",
+      playerNum: null,
       spyMode: false,
       theme: ""
     }
