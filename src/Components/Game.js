@@ -11,7 +11,8 @@ class Game extends React.Component {
             vocab: "",
             liar: 1,
             buttonDisabled: [],
-            displayScreen: ""
+            displayStatus: "플레이어를 선택해주세요",
+            buttonDisabledText: "확인했습니다!"
         }
     }
 
@@ -63,32 +64,53 @@ class Game extends React.Component {
         let card = event.target.className;
         
         if (card.includes("no-liar")) {
-            this.setState({displayScreen: `당신은 라이어가 아닙니다. 이번에 선택된 단어는: ${this.state.vocab}`})
+            this.setState({displayStatus: `당신은 라이어가 아닙니다. 이번에 선택된 단어는: ${this.state.vocab}`})
         } else {
-            this.setState({displayScreen: `당신은 라이어입니다.`})
+            this.setState({displayStatus: `당신은 라이어입니다.`})
         }
 
-        console.log("THIS.STATE", this.state);
+        // console.log("THIS.STATE", this.state);
+    }
+
+    resetDisplayStatus = (event) => {
+        if (this.state.buttonDisabled.length === this.state.playerNum) {
+            // All Player has been selected
+            console.log("모든 플레이어가 선택 되었습니다");
+
+            // Begin Timer
+            
+        } else {
+            if (this.state.playerNum - this.state.buttonDisabled.length === 1) {
+                console.log("One player left");
+                this.setState({buttonDisabledText: "게임 시작!"});
+            }
+            this.setState({displayStatus: "플레이어를 선택해주세요"})
+        }
+        
     }
 
     render() {
-        console.log("PROPS:", this.props);
+        console.log("render()");
+        // console.log("PROPS:", this.props);
         let defaultText = "선택하세요";
-        console.log(this.state.buttonDisabled.includes(0));
+        // console.log(this.state.buttonDisabled.includes(0));
         
         let playersCard = []
         for (let i = 0; i < this.state.playerNum; i++) {
             if (i === this.state.liar) {
-                playersCard.push(<button className={`playersCard liar ${this.state.buttonDisabled.includes(i) ? 'disable' : ''}`} disabled={this.state.buttonDisabled.includes(i) ? true : false} key={i} id={i} onClick={this.showCard}>{defaultText}</button>)
+                playersCard.push(<button className={`playersCard liar ${this.state.buttonDisabled.includes(i) ? 'disabled' : ''}`} disabled={this.state.buttonDisabled.includes(i) ? true : false} key={i} id={i} onClick={this.showCard}>{defaultText}</button>)
             } else {
-                playersCard.push(<button className={`playersCard no-liar ${this.state.buttonDisabled.includes(i) ? 'disable' : ''}`} disabled={this.state.buttonDisabled.includes(i) ? true : false} key={i} id={i} onClick={this.showCard}>{defaultText}</button>)
+                playersCard.push(<button className={`playersCard no-liar ${this.state.buttonDisabled.includes(i) ? 'disabled' : ''}`} disabled={this.state.buttonDisabled.includes(i) ? true : false} key={i} id={i} onClick={this.showCard}>{defaultText}</button>)
             }
         }
-
+        let selectNextPlayerBtn = this.state.displayStatus === "플레이어를 선택해주세요" ? `` : <button onClick={this.resetDisplayStatus}>{this.state.buttonDisabledText}</button>;
         return (
             <div>
                 <h1>게임화면</h1>
-                <div>{this.state.displayScreen}</div>
+                <div>
+                    <p>{this.state.displayStatus}</p>
+                    {selectNextPlayerBtn}
+                </div>
                 { playersCard }
             </div>
         );

@@ -3,7 +3,7 @@
     cursor: pointer;
     padding: 20px;
 
-    &.disable {
+    &.disabled {
         cursor: initial;
         border: 1px solid yellow;
     }
