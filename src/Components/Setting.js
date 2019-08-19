@@ -12,7 +12,7 @@ class Setting extends React.Component {
         }
     }
 
-    selectMenuChange = (event) => {
+    setPlayerNum = (event) => {
         this.setState({playerNum: Number(event.target.value)});
     }
     spyModeSelect = (event) => {
@@ -45,7 +45,7 @@ class Setting extends React.Component {
                 <form>
                     <label>
                         참여인원: {this.state.playerNum}
-                        <select value={this.state.value}>
+                        <select value={this.state.value} onChange={this.setPlayerNum}>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
@@ -57,13 +57,14 @@ class Setting extends React.Component {
                         </select>
                     </label>
                     <label>
-                        {`스파이 모드: ${this.state.spyMode}`}
+                        <span>**스파이 모드는 준비 중입니다!**</span>
+                        {/* {`스파이 모드: ${this.state.spyMode}`}
                         <input 
                             name="spyMode"
                             type="checkbox"
                             checked={this.state.spyMode}
                             onChange={this.spyModeSelect}
-                        />
+                        /> */}
                     </label>
                 </form>
 

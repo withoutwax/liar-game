@@ -12,7 +12,8 @@ class Select extends React.Component {
             buttonDisabled: [],
             displayStatus: "플레이어를 선택해주세요",
             buttonDisabledText: "확인했습니다!",
-            beginGame: false
+            beginGame: false,
+            showCardStatus: false
         }
     }
 
@@ -68,6 +69,11 @@ class Select extends React.Component {
         } else {
             this.setState({displayStatus: `당신은 라이어입니다.`})
         }
+
+        // Hide player select card during check
+        this.setState({
+            showCardStatus: true
+        })
     }
 
     resetDisplayStatus = (event) => {
@@ -90,6 +96,11 @@ class Select extends React.Component {
             }
             this.setState({displayStatus: "플레이어를 선택해주세요"})
         }
+
+        // Show player select card after check
+        this.setState({
+            showCardStatus: false
+        });
     }
 
     render() {
@@ -114,9 +125,9 @@ class Select extends React.Component {
             <div>
                 <div>
                     <p>{this.state.displayStatus}</p>
-                    {nextButton}
+                    { nextButton }
                 </div>
-                { playersCard }
+                {this.state.showCardStatus ? '' : playersCard }
             </div>
         );
     }

@@ -18,7 +18,7 @@ class Finish extends React.Component {
     componentWillMount = () => {
         this.setState({
             liarStatus: this.props.liarStatus,
-            vocab: "짜장면", //this.props.vocab,
+            vocab: this.props.vocab,
             theme: this.props.theme
         });
     }
@@ -49,7 +49,7 @@ class Finish extends React.Component {
             });
         } else {
             this.setState({
-                liarGuessText: "아쉽습니다! 선택한 단어가 틀렸습니다!",
+                liarGuessText: `아쉽습니다! 선택한 단어가 틀렸습니다! 선택된 단어는: ${this.state.vocab}`,
                 headerText: "라이어 패"
             });
         }
@@ -58,7 +58,6 @@ class Finish extends React.Component {
         });
     }
     
-
     render() {
         console.log(this.state);
         let guessCards = this.state.guessWords.map(word => {return <button key={word} value={word} onClick={this.liarGuess}>{word}</button>})
