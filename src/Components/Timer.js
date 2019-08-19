@@ -4,23 +4,24 @@ class Timer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            time: {
-                "Minutes": 0,
-                "Seconds": 0
-            },
-            seconds: 120
+            seconds: 3
         }
         this.timer = 0;
     }
 
     componentDidMount = () => {
-        let timeLeftVar = this.secondsToTime(this.state.seconds);
-        this.setState({ time: timeLeftVar });
+        this.startTimer();
     }
     
-    secondsToTime = (secs) => {
-        
-    }   
+    countDown = () => {
+        let seconds = this.state.seconds - 1;
+        this.setState({ seconds: seconds });
+
+        if (seconds === 0) {
+            clearInterval(this.timer);
+            this.props.timerCheck(false);
+        }
+    }
 
     startTimer = () => {
         this.timer = setInterval(this.countDown, 1000);
@@ -29,7 +30,7 @@ class Timer extends React.Component {
     render() {
         return(
             <div>
-                
+                {this.state.seconds}
             </div>
         );
     }
