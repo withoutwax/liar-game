@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../scss/Finish.scss';
 
 class Finish extends React.Component {
     constructor(props) {
@@ -11,14 +12,15 @@ class Finish extends React.Component {
             guessWords: [],
             liarGuess: false,
             liarGuessText: "",
-            headerText: "라이어는 단어를 선택해주세요"
+            headerText: "라이어는 단어를 선택해주세요",
+            liarWin: true
         }
     }
 
     componentWillMount = () => {
         this.setState({
             liarStatus: this.props.liarStatus,
-            vocab: "짜장면", //this.props.vocab,
+            vocab: this.props.vocab,
             theme: this.props.theme
         });
     }
@@ -45,12 +47,14 @@ class Finish extends React.Component {
         if (guess.target.value === this.state.vocab) {
             this.setState({
                 liarGuessText: "축하합니다! 선택한 단어가 맞습니다!",
-                headerText: "라이어 승"
+                headerText: "라이어 승",
+                liarWin: true
             });
         } else {
             this.setState({
-                liarGuessText: "아쉽습니다! 선택한 단어가 틀렸습니다!",
-                headerText: "라이어 패"
+                liarGuessText: `아쉽습니다! 선택한 단어가 틀렸습니다! 선택된 단어는: ${this.state.vocab}`,
+                headerText: "라이어 패",
+                liarWin: false
             });
         }
         this.setState({
@@ -58,17 +62,20 @@ class Finish extends React.Component {
         });
     }
     
-
     render() {
         console.log(this.state);
-        let guessCards = this.state.guessWords.map(word => {return <button key={word} value={word} onClick={this.liarGuess}>{word}</button>})
+        let guessCards = this.state.guessWords.map(word => {return <button className="guess-cards" key={word} value={word} onClick={this.liarGuess}>{word}</button>})
         let newGame = <Link to='/setting'>새 게임하기</Link>
         console.log(this.state.liarGuess);
+        let headerColor = 'white'
+        if (this.state.liarGuess) {
+            headerColor = this.state.liarWin ? 'green' : 'red';
+        }
         return (
-            <div>
-                <h2>{this.state.headerText}</h2>
+            <div className="finish-container">
+                <h2 className={headerColor}>{this.state.headerText}</h2>
                 <p>{this.state.liarGuessText}</p>
-                <div>{this.state.liarGuess ? newGame : guessCards}</div>
+                <div className="guess-card-container">{this.state.liarGuess ? newGame : guessCards}</div>
             </div>
         );
     }

@@ -1,0 +1,14 @@
+@import '../global.scss';
+
+.finish-container {
+    .guess-card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .guess-cards {
+            width: 30vw;
+            // background-color: red;
+        }   
+    }
+}

@@ -1,3 +1,14 @@
+@import '../global.scss';
+
 .intro-container {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+        margin: 0.25em 0em;
+    }
+    p {
+        margin-bottom: 2em;
+    }
 }

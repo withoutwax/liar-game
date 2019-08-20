@@ -13,11 +13,6 @@ class Game extends React.Component {
             theme: "",
             stage: 1,
             vocab: ""
-            // liar: 1,
-            // buttonDisabled: [],
-            // displayStatus: "플레이어를 선택해주세요",
-            // buttonDisabledText: "확인했습니다!",
-            // beginGame: false
         }
     }
 
@@ -46,8 +41,6 @@ class Game extends React.Component {
         this.setState({vocab: vocab});
     }
 
-    
-
     render() {
         let gameView;
 
@@ -68,9 +61,8 @@ class Game extends React.Component {
 
         return (
             <div>
-                <h1>게임화면</h1>
+                {/* <h1>게임화면</h1> */}
                 { gameView }
-
             </div>
         );
     }

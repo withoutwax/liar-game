@@ -28,11 +28,9 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-          <header className="App-header">
-            <Route exact path="/" component={Intro} />
-            <Route path="/setting/" render={(props) => <Setting parentCallbackState={this.updateGlobalState} {...props} />} />
-            <Route path="/game/" render={(props) => <Game globalState={this.state} {...props}/>} />
-          </header>
+          <Route exact path="/" component={Intro} />
+          <Route path="/setting/" render={(props) => <Setting parentCallbackState={this.updateGlobalState} {...props} />} />
+          <Route path="/game/" render={(props) => <Game globalState={this.state} {...props}/>} />
         </div>
       </Router>
     )

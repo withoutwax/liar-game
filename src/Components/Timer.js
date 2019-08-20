@@ -4,7 +4,7 @@ class Timer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            seconds: 3
+            seconds: 150
         }
         this.timer = 0;
     }
@@ -28,9 +28,10 @@ class Timer extends React.Component {
     }
 
     render() {
+        let timerColor = this.state.seconds <= 20 ? "red" : "";
         return(
             <div>
-                {this.state.seconds}
+                <p><span className={timerColor}>{this.state.seconds}</span> 초</p>
             </div>
         );
     }
