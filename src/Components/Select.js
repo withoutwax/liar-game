@@ -24,7 +24,9 @@ class Select extends React.Component {
             this.setState({
                 playerNum: 3,
                 spyMode: false,
-                theme: "food"
+                theme: "food",
+                vocab: "",
+                playerState: false
             });
         } else {
             this.setState({
@@ -65,9 +67,15 @@ class Select extends React.Component {
         let card = event.target.className;
         
         if (card.includes("no-liar")) {
-            this.setState({displayStatus: `당신은 라이어가 아닙니다. 이번에 선택된 단어는: ${this.state.vocab}`})
+            this.setState({
+                displayStatus: `당신은 라이어가 아닙니다. 이번에 선택된 단어는:`,
+                playerState: false
+            });
         } else {
-            this.setState({displayStatus: `당신은 라이어입니다.`})
+            this.setState({
+                displayStatus: `당신은`,
+                playerState: true
+            });
         }
 
         // Hide player select card during check
@@ -118,13 +126,19 @@ class Select extends React.Component {
                 playersCard.push(<button className={`playersCard no-liar ${this.state.buttonDisabled.includes(i) ? 'disabled' : ''}`} disabled={this.state.buttonDisabled.includes(i) ? true : false} key={i} id={i} onClick={this.showCard}>{defaultText}</button>)
             }
         }
-        
+        console.log(this.state.buttonDisabled.length);
+        let textView;
+        if (this.state.buttonDisabled.length > 0 && this.state.showCardStatus === true) {
+            textView = this.state.playerState ? <span className="red">라이어 입니다.</span> : <span className="green"><br/>{this.state.vocab}</span>;
+        } else {
+            textView = null;
+        }
         let nextButton = this.state.displayStatus === "플레이어를 선택해주세요" ? `` : <button onClick={this.resetDisplayStatus}>{this.state.buttonDisabledText}</button>;
-        
+
         return (
             <div>
                 <div>
-                    <p>{this.state.displayStatus}</p>
+                    <h2>{this.state.displayStatus} {textView}</h2>
                     { nextButton }
                 </div>
                 {this.state.showCardStatus ? '' : playersCard }

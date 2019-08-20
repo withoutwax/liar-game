@@ -1,10 +1,13 @@
+@import '../global.scss';
+
 .playersCard {
-    border: 1px solid red;
+    border: 1px solid $white;
     cursor: pointer;
     padding: 20px;
 
     &.disabled {
-        cursor: initial;
-        border: 1px solid yellow;
+        cursor: not-allowed;
+        border: 1px solid $white;
+        opacity: 0.5;
     }
 }

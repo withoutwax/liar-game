@@ -6,6 +6,7 @@ class Play extends React.Component {
         super(props);
         this.state = {
             displayStatus: "게임 시작!",
+            displayStatus02: "게임이 시작되었습니다! 라이어를 찾아주세요!",
             findLiar: false
         }
         
@@ -16,6 +17,7 @@ class Play extends React.Component {
 
         this.setState({
             displayStatus: "시간이 다 되었습니다! 라이어를 지목해주세요!",
+            displayStatus02: "",
             findLiar: true
         });
     }
@@ -42,7 +44,8 @@ class Play extends React.Component {
         let findLiarButton = [findLiarButton01, findLiarButton02];
         return (
             <div>
-                <h2>{this.state.displayStatus}</h2>
+                <h1>{this.state.displayStatus}</h1>
+                <p>{this.state.displayStatus02}</p>
                 <Timer timerCheck={this.checkTimerEnds}/>
                 {this.state.findLiar ? findLiarButton.map(element => { return element}) : ''}
             </div>

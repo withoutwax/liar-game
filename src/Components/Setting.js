@@ -8,7 +8,8 @@ class Setting extends React.Component {
         this.state = {
             playerNum: 3,
             spyMode: false,
-            theme: ""
+            theme: "",
+            themeKr: ""
         }
     }
 
@@ -25,8 +26,11 @@ class Setting extends React.Component {
         });
     }
     setTheme = (event) => {
-        console.log(event.target.value);
-        this.setState({theme: event.target.value});
+        // console.log(event.target.textContent);
+        this.setState({
+            theme: event.target.value,
+            themeKr: event.target.textContent
+        });
     }
 
     updateGlobalState = () => {
@@ -42,9 +46,9 @@ class Setting extends React.Component {
             <section className="setting-container">
                 <h1>설정 창</h1>
 
-                <form>
-                    <label>
-                        참여인원: {this.state.playerNum}
+                <form className="setting-form">
+                    <label className="player-num">
+                        <h2>참여인원:</h2>
                         <select value={this.state.value} onChange={this.setPlayerNum}>
                             <option value="3">3</option>
                             <option value="4">4</option>
@@ -56,8 +60,8 @@ class Setting extends React.Component {
                             <option value="10">10</option>
                         </select>
                     </label>
-                    <label>
-                        <span>**스파이 모드는 준비 중입니다!**</span>
+                    <label className="spy-mode">
+                        <span className="caption" style={{fontSize:1+'rem'}}>**스파이 모드는 준비 중입니다!**</span>
                         {/* {`스파이 모드: ${this.state.spyMode}`}
                         <input 
                             name="spyMode"
@@ -68,14 +72,16 @@ class Setting extends React.Component {
                     </label>
                 </form>
 
-                <div>
-                    <h2>주제: {`${this.state.theme}`}</h2>
+                <div className="theme-select">
+                    <h2>주제: {`${this.state.themeKr}`}</h2>
                     <button value="food" onClick={this.setTheme}>음식</button>
                     <button value="place" onClick={this.setTheme}>장소</button>
                     <button value="occupation" onClick={this.setTheme}>직업</button>
                 </div>
-
-                {startGameButton}
+                
+                <div>
+                    {startGameButton}
+                </div>
                 
             </section>
             );

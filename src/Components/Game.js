@@ -61,7 +61,7 @@ class Game extends React.Component {
 
         return (
             <div>
-                <h1>게임화면</h1>
+                {/* <h1>게임화면</h1> */}
                 { gameView }
             </div>
         );
