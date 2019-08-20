@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 import './App.scss';
 
 import Intro from './Components/Intro';
@@ -26,13 +26,13 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router>
+      <HashRouter basename='/'>
         <div className="App">
           <Route exact path="/" component={Intro} />
           <Route path="/setting/" render={(props) => <Setting parentCallbackState={this.updateGlobalState} {...props} />} />
           <Route path="/game/" render={(props) => <Game globalState={this.state} {...props}/>} />
         </div>
-      </Router>
+      </HashRouter>
     )
   };
 }
