@@ -65,7 +65,7 @@ class Setting extends React.Component {
                         </select>
                     </label>
                     <label className="set-timer">
-                        <h2>참여인원:</h2>
+                        <h2>제한시간:</h2>
                         <select value={this.state.value} onChange={this.setTimer}>
                             <option value="60">60 초</option>
                             <option value="90">90 초</option>
