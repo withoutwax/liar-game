@@ -46,7 +46,7 @@ class Play extends React.Component {
             <div>
                 <h1>{this.state.displayStatus}</h1>
                 <p>{this.state.displayStatus02}</p>
-                <Timer timerCheck={this.checkTimerEnds}/>
+                <Timer timerCheck={this.checkTimerEnds} globalTimer={this.props.globalTimer}/>
                 {this.state.findLiar ? findLiarButton.map(element => { return element}) : ''}
             </div>
         );

@@ -4,11 +4,15 @@ class Timer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            seconds: 150
+            seconds: 120
         }
         this.timer = 0;
     }
-
+    componentWillMount = () => {
+        this.setState({
+            seconds: this.props.globalTimer
+        })
+    }
     componentDidMount = () => {
         this.startTimer();
     }

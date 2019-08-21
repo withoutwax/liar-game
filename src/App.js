@@ -11,6 +11,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       playerNum: null,
+      timer: null,
       spyMode: false,
       theme: ""
     }
@@ -19,6 +20,7 @@ class App extends React.Component {
   updateGlobalState = (setting) => {
     this.setState({
       playerNum: setting.playerNum,
+      timer: setting.timer,
       spyMode: setting.spyMode,
       theme: setting.theme
     });

@@ -9,6 +9,7 @@ class Game extends React.Component {
         super(props);
         this.state = {
             playerNum: null,
+            timer: null,
             spyMode: null,
             theme: "",
             stage: 1,
@@ -21,12 +22,14 @@ class Game extends React.Component {
         if (this.props.globalState.playerNum === "" || this.props.globalState.theme === "") {
             this.setState({
                 playerNum: 3,
+                timer: 120,
                 spyMode: false,
                 theme: "food"
             });
         } else {
             this.setState({
                 playerNum: this.props.globalState.playerNum,
+                timer: this.props.globalState.timer,
                 spyMode: this.props.globalState.spyMode,
                 theme: this.props.globalState.theme
             });
@@ -49,7 +52,7 @@ class Game extends React.Component {
                 gameView = <Select globalState={this.state} nextStage={this.progressNextStage} setVocab={this.updateGlobalVocab}/>;
                 break;
             case 2:
-                gameView = <Play nextStage={this.progressNextStage}/>;
+                gameView = <Play nextStage={this.progressNextStage} globalTimer={this.state.timer}/>;
                 break;
             case 3:
                 gameView = <Finish nextStage={this.progressNextStage} liarStatus='found' vocab={this.state.vocab} theme={this.state.theme} />

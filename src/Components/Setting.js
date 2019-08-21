@@ -7,6 +7,7 @@ class Setting extends React.Component {
         super(props);
         this.state = {
             playerNum: 3,
+            timer: 120,
             spyMode: false,
             theme: "",
             themeKr: ""
@@ -15,6 +16,9 @@ class Setting extends React.Component {
 
     setPlayerNum = (event) => {
         this.setState({playerNum: Number(event.target.value)});
+    }
+    setTimer = (event) => {
+        this.setState({timer: Number(event.target.value)});
     }
     spyModeSelect = (event) => {
         // console.log(this.state.spyMode);
@@ -60,6 +64,18 @@ class Setting extends React.Component {
                             <option value="10">10</option>
                         </select>
                     </label>
+                    <label className="set-timer">
+                        <h2>참여인원:</h2>
+                        <select value={this.state.value} onChange={this.setTimer}>
+                            <option value="60">60 초</option>
+                            <option value="90">90 초</option>
+                            <option value="120">120 초 (2분)</option>
+                            <option value="150">150 초 (2분 30초)</option>
+                            <option value="180">180 초 (3분)</option>
+                            <option value="240">240 초 (4분)</option>
+                            <option value="300">300 초 (5분)</option>
+                        </select>
+                    </label>
                     <label className="spy-mode">
                         <span className="caption" style={{fontSize:1+'rem'}}>**스파이 모드는 준비 중입니다!**</span>
                         {/* {`스파이 모드: ${this.state.spyMode}`}
@@ -77,6 +93,7 @@ class Setting extends React.Component {
                     <button value="food" onClick={this.setTheme}>음식</button>
                     <button value="place" onClick={this.setTheme}>장소</button>
                     <button value="occupation" onClick={this.setTheme}>직업</button>
+                    <button value="biblecharacter" onClick={this.setTheme}>성경인물</button>
                 </div>
                 
                 <div>
