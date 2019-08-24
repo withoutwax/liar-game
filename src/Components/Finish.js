@@ -25,7 +25,7 @@ class Finish extends React.Component {
         });
     }
     componentDidMount = () => {
-        if (this.state.liarStatus === "not-found"){
+        if (this.state.liarStatus === "found"){
             const chosenTheme = {
                 "food": require('../data/food.json'),
                 "place": require('../data/place.json'),
