@@ -13,7 +13,8 @@ class Select extends React.Component {
             displayStatus: "플레이어를 선택해주세요",
             buttonDisabledText: "확인했습니다!",
             beginGame: false,
-            showCardStatus: false
+            showCardStatus: false,
+            easterEgg: ""
         }
     }
 
@@ -35,6 +36,7 @@ class Select extends React.Component {
                 theme: this.props.globalState.theme
             });
         }
+        if (this.props.globalState.easterEgg !== "") {this.setState({easterEgg:this.props.globalState.easterEgg})};
     }
 
     componentDidMount = () => {
@@ -42,11 +44,15 @@ class Select extends React.Component {
             "food": require('../data/food.json'),
             "place": require('../data/place.json'),
             "occupation": require('../data/occupation.json'),
-            "biblecharacter": require('../data/biblecharacter.json')
+            "biblecharacter": require('../data/biblecharacter.json'),
+            "onnurichanyangteammember": require('../data/onnurichanyangteammember.json')
         }
         let data = chosenTheme[this.state.theme].kr; // Currently only set to Korean
 
         // Generate a random number to choose the menu
+        this.generateRandomNumber(data);
+    }
+    generateRandomNumber = (data) => {
         let randomIndex = Math.floor(Math.random() * data.length);
         let chooseLiar = Math.floor(Math.random() * this.state.playerNum);
 
@@ -55,6 +61,7 @@ class Select extends React.Component {
             liar: chooseLiar
         });
     }
+
     showCard = (event) => {
         let button = Number(event.target.id);
         
@@ -117,7 +124,7 @@ class Select extends React.Component {
         // console.log("PROPS:", this.props);
         let defaultText = "선택하세요";
         // console.log(this.state.buttonDisabled.includes(0));
-        console.log("THIS.STATE", this.state);
+        // console.log("THIS.STATE", this.state);
         
         let playersCard = []
         for (let i = 0; i < this.state.playerNum; i++) {

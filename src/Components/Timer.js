@@ -4,17 +4,28 @@ class Timer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            seconds: 120
+            seconds: 60,
+            unlimited: false
         }
         this.timer = 0;
     }
     componentWillMount = () => {
-        this.setState({
-            seconds: this.props.globalTimer
-        })
+        if (this.props.globalTimer === "unlimited") {
+            this.setState ({
+                seconds: "시간은 무제한 입니다",
+                unlimited: true
+            });
+            this.props.timerCheck(false);
+        } else {
+            this.setState({
+                seconds: this.props.globalTimer
+            });
+        }
     }
     componentDidMount = () => {
-        this.startTimer();
+        if (this.state.unlimited === false) {
+            this.startTimer();
+        }
     }
     
     countDown = () => {
@@ -35,7 +46,7 @@ class Timer extends React.Component {
         let timerColor = this.state.seconds <= 20 ? "red" : "";
         return(
             <div>
-                <p><span className={timerColor}>{this.state.seconds}</span> 초</p>
+                <p><span className={timerColor}>{this.state.seconds}</span> {this.state.unlimited ? '' : '초'}</p>
             </div>
         );
     }

@@ -13,16 +13,17 @@ class Game extends React.Component {
             spyMode: null,
             theme: "",
             stage: 1,
-            vocab: ""
+            vocab: "",
+            easterEgg: ""
         }
     }
 
     componentWillMount = () => {
         // TODO: Uncomment after testing. This code updates data with Global Setting
-        if (this.props.globalState.playerNum === "" || this.props.globalState.theme === "") {
+        if (this.props.globalState.playerNum === null && this.props.globalState.theme === "") {
             this.setState({
                 playerNum: 3,
-                timer: 120,
+                timer: "unlimited",
                 spyMode: false,
                 theme: "food"
             });
@@ -31,9 +32,10 @@ class Game extends React.Component {
                 playerNum: this.props.globalState.playerNum,
                 timer: this.props.globalState.timer,
                 spyMode: this.props.globalState.spyMode,
-                theme: this.props.globalState.theme
+                theme: this.props.globalState.theme,
             });
         }
+        if (this.props.globalState.easterEgg !== "") {this.setState({easterEgg:this.props.globalState.easterEgg})};
     }
 
     progressNextStage = (stage) => {

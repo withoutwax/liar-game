@@ -14,9 +14,12 @@ class Play extends React.Component {
 
     checkTimerEnds = (timer) => {
         console.log("Check Timer", timer);
-
+        let text = "시간이 다 되었습니다! 라이어를 지목해주세요!"
+        if (this.props.globalTimer === "unlimited") {
+            text = "준비가 되면 아래의 버튼을 선택하여 진행해주세요.";
+        }
         this.setState({
-            displayStatus: "시간이 다 되었습니다! 라이어를 지목해주세요!",
+            displayStatus: text,
             displayStatus02: "",
             findLiar: true
         });

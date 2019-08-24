@@ -25,12 +25,13 @@ class Finish extends React.Component {
         });
     }
     componentDidMount = () => {
-        if (this.state.liarStatus === "found"){
+        if (this.state.liarStatus === "not-found"){
             const chosenTheme = {
                 "food": require('../data/food.json'),
                 "place": require('../data/place.json'),
                 "occupation": require('../data/occupation.json'),
-                "biblecharacter": require('../data/biblecharacter.json')
+                "biblecharacter": require('../data/biblecharacter.json'),
+                "onnurichanyangteammember": require('../data/onnurichanyangteammember.json')
             }
             let data = chosenTheme[this.state.theme].kr; // Currently only set to Korean
             this.setState({guessWords: this.state.guessWords.concat(data)});

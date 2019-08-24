@@ -7,18 +7,28 @@ class Setting extends React.Component {
         super(props);
         this.state = {
             playerNum: 3,
-            timer: 120,
+            timer: 60,
             spyMode: false,
             theme: "",
-            themeKr: ""
+            themeKr: "",
+            easterEgg: ""
         }
+    }
+
+    componentWillMount = () => {
+        if (this.props.globalState.easterEgg !== "") {this.setState({easterEgg:this.props.globalState.easterEgg})};
+        console.log(this.props.globalState.easterEgg);
     }
 
     setPlayerNum = (event) => {
         this.setState({playerNum: Number(event.target.value)});
     }
     setTimer = (event) => {
-        this.setState({timer: Number(event.target.value)});
+        if (event.target.value === "unlimited") {
+            this.setState({timer: event.target.value});
+        } else {
+            this.setState({timer: Number(event.target.value)});
+        }
     }
     spyModeSelect = (event) => {
         // console.log(this.state.spyMode);
@@ -62,6 +72,16 @@ class Setting extends React.Component {
                             <option value="8">8</option>
                             <option value="9">9</option>
                             <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
                         </select>
                     </label>
                     <label className="set-timer">
@@ -74,6 +94,7 @@ class Setting extends React.Component {
                             <option value="180">180 초 (3분)</option>
                             <option value="240">240 초 (4분)</option>
                             <option value="300">300 초 (5분)</option>
+                            <option value="unlimited">무제한</option>
                         </select>
                     </label>
                     <label className="spy-mode">
@@ -93,7 +114,8 @@ class Setting extends React.Component {
                     <button value="food" onClick={this.setTheme}>음식</button>
                     <button value="place" onClick={this.setTheme}>장소</button>
                     <button value="occupation" onClick={this.setTheme}>직업</button>
-                    <button value="biblecharacter" onClick={this.setTheme}>성경인물</button>
+                    {this.state.easterEgg === "onnuri" ? <button value="biblecharacter" onClick={this.setTheme}>성경인물</button> : ""}
+                    {this.state.easterEgg === "onnuri" ? <button value="onnurichanyangteammember" onClick={this.setTheme}>찬양팀</button> : ""}
                 </div>
                 
                 <div>

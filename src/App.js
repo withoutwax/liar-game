@@ -13,8 +13,15 @@ class App extends React.Component {
       playerNum: null,
       timer: null,
       spyMode: false,
-      theme: ""
+      theme: "",
+      easterEgg: ""
     }
+  }
+
+  activateEasterEgg = (code) => {
+    this.setState({
+      easterEgg: code
+    });
   }
 
   updateGlobalState = (setting) => {
@@ -30,8 +37,8 @@ class App extends React.Component {
     return (
       <HashRouter basename='/'>
         <div className="App">
-          <Route exact path="/" component={Intro} />
-          <Route path="/setting/" render={(props) => <Setting parentCallbackState={this.updateGlobalState} {...props} />} />
+          <Route exact path="/" render={(props) => <Intro parentCallbackEasterEgg={this.activateEasterEgg} {...props} />} />
+          <Route path="/setting/" render={(props) => <Setting parentCallbackState={this.updateGlobalState} globalState={this.state} {...props} />} />
           <Route path="/game/" render={(props) => <Game globalState={this.state} {...props}/>} />
         </div>
       </HashRouter>
