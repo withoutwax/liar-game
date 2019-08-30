@@ -9,21 +9,21 @@ class Timer extends React.Component {
         }
         this.timer = 0;
     }
-    componentWillMount = () => {
+
+    componentDidMount = () => {
         if (this.props.globalTimer === "unlimited") {
             this.setState ({
                 seconds: "시간은 무제한 입니다",
                 unlimited: true
             });
             this.props.timerCheck(false);
+        } else if (this.props.globalTimer === null) {
+            this.setState({seconds: 60})
+            this.startTimer();
         } else {
             this.setState({
                 seconds: this.props.globalTimer
             });
-        }
-    }
-    componentDidMount = () => {
-        if (this.state.unlimited === false) {
             this.startTimer();
         }
     }
@@ -43,6 +43,7 @@ class Timer extends React.Component {
     }
 
     render() {
+        console.log(this.state);
         let timerColor = this.state.seconds <= 20 ? "red" : "";
         return(
             <div>

@@ -8,33 +8,19 @@ class Game extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            playerNum: null,
-            timer: null,
-            spyMode: null,
-            theme: "",
+            playerNum: this.props.globalState.playerNum,
+            timer: this.props.globalState.timer,
+            spyMode: this.props.globalState.spyMode,
+            theme: this.props.globalState.theme,
             stage: 1,
             vocab: "",
-            easterEgg: ""
+            easterEgg: "",
+            apiData: this.props.globalState.apiData,
+            selectData: null
         }
     }
 
-    componentWillMount = () => {
-        // TODO: Uncomment after testing. This code updates data with Global Setting
-        if (this.props.globalState.playerNum === null && this.props.globalState.theme === "") {
-            this.setState({
-                playerNum: 3,
-                timer: "unlimited",
-                spyMode: false,
-                theme: "food"
-            });
-        } else {
-            this.setState({
-                playerNum: this.props.globalState.playerNum,
-                timer: this.props.globalState.timer,
-                spyMode: this.props.globalState.spyMode,
-                theme: this.props.globalState.theme,
-            });
-        }
+    componentDidMount = () => {
         if (this.props.globalState.easterEgg !== "") {this.setState({easterEgg:this.props.globalState.easterEgg})};
     }
 
@@ -42,8 +28,11 @@ class Game extends React.Component {
         this.setState({stage: stage});
     }
 
-    updateGlobalVocab = (vocab) => {
-        this.setState({vocab: vocab});
+    updateGlobalVocab = (vocab, selectData) => {
+        this.setState({
+            vocab: vocab,
+            selectData: selectData
+        });
     }
 
     render() {
@@ -57,10 +46,10 @@ class Game extends React.Component {
                 gameView = <Play nextStage={this.progressNextStage} globalTimer={this.state.timer}/>;
                 break;
             case 3:
-                gameView = <Finish nextStage={this.progressNextStage} liarStatus='found' vocab={this.state.vocab} theme={this.state.theme} />
+                gameView = <Finish nextStage={this.progressNextStage} liarStatus='found' vocab={this.state.vocab} theme={this.state.theme} selectData={this.state.selectData} />
                 break;
             case 4:
-                gameView = <Finish nextStage={this.progressNextStage} liarStatus='not-found' vocab={this.state.vocab} theme={this.state.theme} />
+                gameView = <Finish nextStage={this.progressNextStage} liarStatus='not-found' vocab={this.state.vocab} theme={this.state.theme} selectData={this.state.selectData} />
                 break;
         }
 

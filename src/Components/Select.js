@@ -4,9 +4,9 @@ class Select extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            playerNum: null,
-            spyMode: null,
-            theme: "",
+            playerNum: this.props.globalState.playerNum || 3,
+            spyMode: this.props.globalState.spyMode,
+            theme: this.props.globalState.theme || "food",
             vocab: "",
             liar: 1,
             buttonDisabled: [],
@@ -14,44 +14,41 @@ class Select extends React.Component {
             buttonDisabledText: "확인했습니다!",
             beginGame: false,
             showCardStatus: false,
-            easterEgg: ""
+            easterEgg: "",
+            apiData: this.props.globalState.apiData,
+            selectData: null
         }
-    }
-
-    // Update State
-    componentWillMount = () => {
-        // TODO: Uncomment after testing. This code updates data with Global Setting
-        if (this.props.globalState.playerNum === "" || this.props.globalState.theme === "") {
-            this.setState({
-                playerNum: 3,
-                spyMode: false,
-                theme: "food",
-                vocab: "",
-                playerState: false
-            });
-        } else {
-            this.setState({
-                playerNum: this.props.globalState.playerNum,
-                spyMode: this.props.globalState.spyMode,
-                theme: this.props.globalState.theme
-            });
-        }
-        if (this.props.globalState.easterEgg !== "") {this.setState({easterEgg:this.props.globalState.easterEgg})};
     }
 
     componentDidMount = () => {
-        const chosenTheme = {
-            "food": require('../data/food.json'),
-            "place": require('../data/place.json'),
-            "occupation": require('../data/occupation.json'),
-            "biblecharacter": require('../data/biblecharacter.json'),
-            "onnurichanyangteammember": require('../data/onnurichanyangteammember.json')
+        // Set Easter Egg
+        if (this.props.globalState.easterEgg !== "") {this.setState({easterEgg:this.props.globalState.easterEgg})};
+        
+        // If the API is not present
+        let chosenTheme;
+        let data;
+        if (this.state.apiData === null) {
+            chosenTheme = {
+                "food": require('../data/food.json'),
+                "place": require('../data/place.json'),
+                "occupation": require('../data/occupation.json'),
+                "biblecharacter": require('../data/biblecharacter.json'),
+                "onnurichanyangteammember": require('../data/onnurichanyangteammember.json')
+            }
+            // console.log(chosenTheme[this.state.theme].kr);
+            data = chosenTheme[this.state.theme].kr;
+        } else {
+            this.state.apiData.data.map(words => {
+                if (words.type === this.state.theme) {
+                    chosenTheme = words.kr;
+                }
+            });
+            data = chosenTheme;
         }
-        let data = chosenTheme[this.state.theme].kr; // Currently only set to Korean
-
-        // Generate a random number to choose the menu
+        this.setState({ selectData: data });
         this.generateRandomNumber(data);
     }
+    
     generateRandomNumber = (data) => {
         let randomIndex = Math.floor(Math.random() * data.length);
         let chooseLiar = Math.floor(Math.random() * this.state.playerNum);
@@ -103,7 +100,7 @@ class Select extends React.Component {
                 beginGame: true 
             });
             this.props.nextStage(2);
-            this.props.setVocab(this.state.vocab);
+            this.props.setVocab(this.state.vocab, this.state.selectData);
             
         } else {
             if (this.state.playerNum - this.state.buttonDisabled.length === 1) {
@@ -134,7 +131,7 @@ class Select extends React.Component {
                 playersCard.push(<button className={`playersCard no-liar ${this.state.buttonDisabled.includes(i) ? 'disabled' : ''}`} disabled={this.state.buttonDisabled.includes(i) ? true : false} key={i} id={i} onClick={this.showCard}>{defaultText}</button>)
             }
         }
-        console.log(this.state.buttonDisabled.length);
+        console.log(this.state);
         let textView;
         if (this.state.buttonDisabled.length > 0 && this.state.showCardStatus === true) {
             textView = this.state.playerState ? <span className="red">라이어 입니다.</span> : <span className="green"><br/>{this.state.vocab}</span>;

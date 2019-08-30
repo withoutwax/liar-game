@@ -11,13 +11,22 @@ class Setting extends React.Component {
             spyMode: false,
             theme: "",
             themeKr: "",
-            easterEgg: ""
+            easterEgg: "",
+            apiData: null
         }
     }
 
-    componentWillMount = () => {
+    componentDidMount = () => {
         if (this.props.globalState.easterEgg !== "") {this.setState({easterEgg:this.props.globalState.easterEgg})};
         console.log(this.props.globalState.easterEgg);
+
+        // Get data from API
+        this.getDataFromDb();
+    }
+    getDataFromDb = () => {
+        fetch('https://liar-game-api.withoutwax.now.sh/api/getData')
+            .then((data) => data.json())
+            .then((res) => { this.setState({ apiData: res}) })
     }
 
     setPlayerNum = (event) => {

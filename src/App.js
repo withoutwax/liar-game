@@ -14,7 +14,8 @@ class App extends React.Component {
       timer: null,
       spyMode: false,
       theme: "",
-      easterEgg: ""
+      easterEgg: "",
+      apiData: null
     }
   }
 
@@ -29,7 +30,8 @@ class App extends React.Component {
       playerNum: setting.playerNum,
       timer: setting.timer,
       spyMode: setting.spyMode,
-      theme: setting.theme
+      theme: setting.theme,
+      apiData: setting.apiData
     });
   }
 

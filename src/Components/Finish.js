@@ -6,35 +6,23 @@ class Finish extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            liarStatus: "",
-            vocab: "",
-            theme: "",
-            guessWords: [],
+            liarStatus: this.props.liarStatus,
+            vocab: this.props.vocab,
+            theme: this.props.theme,
+            // guessWords: [],
             liarGuess: false,
             liarGuessText: "",
             headerText: "라이어는 단어를 선택해주세요",
-            liarWin: true
+            liarWin: true,
+            selectData: this.props.selectData
         }
     }
 
-    componentWillMount = () => {
-        this.setState({
-            liarStatus: this.props.liarStatus,
-            vocab: this.props.vocab,
-            theme: this.props.theme
-        });
-    }
     componentDidMount = () => {
         if (this.state.liarStatus === "found"){
-            const chosenTheme = {
-                "food": require('../data/food.json'),
-                "place": require('../data/place.json'),
-                "occupation": require('../data/occupation.json'),
-                "biblecharacter": require('../data/biblecharacter.json'),
-                "onnurichanyangteammember": require('../data/onnurichanyangteammember.json')
-            }
-            let data = chosenTheme[this.state.theme].kr; // Currently only set to Korean
-            this.setState({guessWords: this.state.guessWords.concat(data)});
+            let data = this.state.selectData // Currently only set to Korean
+            // console.log(data);
+            // this.setState({guessWords: this.state.guessWords.concat(data)});
         } else {
             this.setState({
                 headerText: "축하합니다. 라이어를 잡았습니다!",
@@ -66,7 +54,7 @@ class Finish extends React.Component {
     
     render() {
         console.log(this.state);
-        let guessCards = this.state.guessWords.map(word => {return <button className="guess-cards" key={word} value={word} onClick={this.liarGuess}>{word}</button>})
+        let guessCards = this.state.selectData.map(word => {return <button className="guess-cards" key={word} value={word} onClick={this.liarGuess}>{word}</button>})
         let newGame = <Link to='/setting'>새 게임하기</Link>
         console.log(this.state.liarGuess);
         let headerColor = 'white'
