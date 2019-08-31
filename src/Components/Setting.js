@@ -11,14 +11,14 @@ class Setting extends React.Component {
             spyMode: false,
             theme: "",
             themeKr: "",
-            easterEgg: "",
+            easterEgg: "false",
             apiData: null
         }
     }
 
     componentDidMount = () => {
         if (this.props.globalState.easterEgg !== "") {this.setState({easterEgg:this.props.globalState.easterEgg})};
-        console.log(this.props.globalState.easterEgg);
+        // console.log('Easter Egg:', this.props.globalState.easterEgg);
 
         // Get data from API
         this.getDataFromDb();
@@ -64,6 +64,21 @@ class Setting extends React.Component {
         
         // Display 게임 시작! button when the user chooses the theme.
         let startGameButton = this.state.theme !== "" ? (<Link to='/game' onClick={this.updateGlobalState}>게임시작!</Link>) : ``;
+
+        let themeButton = [];
+        // After apiData state has value from the API
+        if (this.state.apiData) {
+            // console.log(this.state.apiData.data);
+            themeButton = this.state.apiData.data.map(theme => {
+                // console.log(theme);
+                // theme.type = "food"
+                // theme.typeKr = "음식"
+                // theme.easterEgg = "false"
+                return theme.easterEgg === "false" || theme.easterEgg === this.state.easterEgg ? <button value={theme.type} onClick={this.setTheme} key={theme.type}>{ theme.typeKr }</button> : ""
+            });
+        }
+        // console.log(themeButton);
+        
 
         return (
             <section className="setting-container">
@@ -119,12 +134,10 @@ class Setting extends React.Component {
                 </form>
 
                 <div className="theme-select">
-                    <h2>주제: {`${this.state.themeKr}`}</h2>
-                    <button value="food" onClick={this.setTheme}>음식</button>
-                    <button value="place" onClick={this.setTheme}>장소</button>
-                    <button value="occupation" onClick={this.setTheme}>직업</button>
-                    {this.state.easterEgg === "onnuri" ? <button value="biblecharacter" onClick={this.setTheme}>성경인물</button> : ""}
-                    {this.state.easterEgg === "onnuri" ? <button value="onnurichanyangteammember" onClick={this.setTheme}>찬양팀</button> : ""}
+                    <h2>주제: {`${this.state.themeKr}`}</h2>                    
+                    {themeButton.map(button => {
+                        return button
+                    })}
                 </div>
                 
                 <div>

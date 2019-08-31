@@ -28,6 +28,7 @@ class Select extends React.Component {
         let chosenTheme;
         let data;
         if (this.state.apiData === null) {
+            // console.log("apidata == null");
             chosenTheme = {
                 "food": require('../data/food.json'),
                 "place": require('../data/place.json'),
@@ -38,11 +39,15 @@ class Select extends React.Component {
             // console.log(chosenTheme[this.state.theme].kr);
             data = chosenTheme[this.state.theme].kr;
         } else {
-            this.state.apiData.data.map(words => {
+            // console.log("apidata == api");
+            for (let i = 0; i < this.state.apiData.data.length; i++) {
+                let words = this.state.apiData.data[i];
                 if (words.type === this.state.theme) {
+                    // console.log(words);
                     chosenTheme = words.kr;
                 }
-            });
+                // chosenTheme = this.state.apiData.data.kr
+            }
             data = chosenTheme;
         }
         this.setState({ selectData: data });
@@ -89,7 +94,7 @@ class Select extends React.Component {
         })
     }
 
-    resetDisplayStatus = (event) => {
+    resetDisplayStatus = () => {
         if (this.state.buttonDisabled.length === this.state.playerNum) {
             // All Player has been selected
             console.log("모든 플레이어가 선택 되었습니다");

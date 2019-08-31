@@ -20,7 +20,7 @@ class Finish extends React.Component {
 
     componentDidMount = () => {
         if (this.state.liarStatus === "found"){
-            let data = this.state.selectData // Currently only set to Korean
+            // let data = this.state.selectData // Currently only set to Korean
             // console.log(data);
             // this.setState({guessWords: this.state.guessWords.concat(data)});
         } else {

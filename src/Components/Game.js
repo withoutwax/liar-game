@@ -51,6 +51,9 @@ class Game extends React.Component {
             case 4:
                 gameView = <Finish nextStage={this.progressNextStage} liarStatus='not-found' vocab={this.state.vocab} theme={this.state.theme} selectData={this.state.selectData} />
                 break;
+            default:
+                gameView = <Select globalState={this.state} nextStage={this.progressNextStage} setVocab={this.updateGlobalVocab}/>;
+                break;
         }
 
         return (
