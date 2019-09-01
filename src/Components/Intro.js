@@ -1,5 +1,6 @@
 import React from 'react';
 import "../scss/Intro.scss";
+import PackageJson from '../../package.json';
 
 import  { Link } from 'react-router-dom';
 
@@ -38,6 +39,7 @@ class Intro extends React.Component {
                 {this.state.easterEggMode ? <input className="easterEggInput" placeholder="코드를 입력하세요" onChange={this.specialCode}></input> : ''}
                 {this.state.codeActivated ? <p className="green">{this.state.codeActivatedText}</p> : ''}
                 <Link to='/setting'>게임하기</Link>
+                <p className="version">version v{PackageJson.version}</p>
             </section>
         );
     }

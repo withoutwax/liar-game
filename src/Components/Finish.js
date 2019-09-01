@@ -9,7 +9,6 @@ class Finish extends React.Component {
             liarStatus: this.props.liarStatus,
             vocab: this.props.vocab,
             theme: this.props.theme,
-            // guessWords: [],
             liarGuess: false,
             liarGuessText: "",
             headerText: "라이어는 단어를 선택해주세요",
@@ -19,31 +18,27 @@ class Finish extends React.Component {
     }
 
     componentDidMount = () => {
-        if (this.state.liarStatus === "found"){
-            // let data = this.state.selectData // Currently only set to Korean
-            // console.log(data);
-            // this.setState({guessWords: this.state.guessWords.concat(data)});
-        } else {
+        if (this.state.liarStatus !== "found"){
+            console.log("Could not find liar");
             this.setState({
-                headerText: "축하합니다. 라이어를 잡았습니다!",
+                headerText: "라이어를 찾지 못하였습니다! 라이어가 승리하였습니다!",
                 liarGuess: true
             });
-        }
-        
+        } 
     }
 
     liarGuess = (guess) => {
         console.log(guess.target.value, this.state.vocab);
         if (guess.target.value === this.state.vocab) {
             this.setState({
-                liarGuessText: "축하합니다! 선택한 단어가 맞습니다!",
-                headerText: "라이어 승",
+                liarGuessText: "선택한 단어가 맞습니다!",
+                headerText: "라이어가 승리하였습니다!",
                 liarWin: true
             });
         } else {
             this.setState({
-                liarGuessText: `아쉽습니다! 선택한 단어가 틀렸습니다! 선택된 단어는: ${this.state.vocab}`,
-                headerText: "라이어 패",
+                liarGuessText: `틀렸습니다! 선택된 단어는: ${this.state.vocab}`,
+                headerText: "라이어가 패하였습니다!",
                 liarWin: false
             });
         }
