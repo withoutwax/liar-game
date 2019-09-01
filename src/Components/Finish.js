@@ -21,7 +21,8 @@ class Finish extends React.Component {
         if (this.state.liarStatus !== "found"){
             console.log("Could not find liar");
             this.setState({
-                headerText: "라이어를 찾지 못하였습니다! 라이어가 승리하였습니다!",
+                liarGuessText: "라이어를 찾지 못하였습니다!",
+                headerText: "라이어가 승리하였습니다!",
                 liarGuess: true
             });
         } 
