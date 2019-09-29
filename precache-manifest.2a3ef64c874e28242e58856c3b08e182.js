@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "32f3b1ad3bc56748622417dcd158eebd",
+    "revision": "03f15ff5f122972a86538e6a59973734",
     "url": "/Liar-Game/index.html"
   },
   {
-    "revision": "71f819fdbf82493a1ec0",
+    "revision": "24dc6fc62504a31396d8",
     "url": "/Liar-Game/static/css/main.ad996443.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Liar-Game/static/js/2.0acdaad6.chunk.js"
   },
   {
-    "revision": "71f819fdbf82493a1ec0",
-    "url": "/Liar-Game/static/js/main.0d7b047d.chunk.js"
+    "revision": "24dc6fc62504a31396d8",
+    "url": "/Liar-Game/static/js/main.6cc656a2.chunk.js"
   },
   {
     "revision": "2b35e18c4a98daf442f7",

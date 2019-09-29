@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Liar-Game/static/css/main.ad996443.chunk.css",
-    "main.js": "/Liar-Game/static/js/main.0d7b047d.chunk.js",
-    "main.js.map": "/Liar-Game/static/js/main.0d7b047d.chunk.js.map",
+    "main.js": "/Liar-Game/static/js/main.6cc656a2.chunk.js",
+    "main.js.map": "/Liar-Game/static/js/main.6cc656a2.chunk.js.map",
     "runtime~main.js": "/Liar-Game/static/js/runtime~main.8069a201.js",
     "runtime~main.js.map": "/Liar-Game/static/js/runtime~main.8069a201.js.map",
     "static/js/2.0acdaad6.chunk.js": "/Liar-Game/static/js/2.0acdaad6.chunk.js",
     "static/js/2.0acdaad6.chunk.js.map": "/Liar-Game/static/js/2.0acdaad6.chunk.js.map",
     "index.html": "/Liar-Game/index.html",
-    "precache-manifest.f9799d7686a4c831d5a4041493460d10.js": "/Liar-Game/precache-manifest.f9799d7686a4c831d5a4041493460d10.js",
+    "precache-manifest.2a3ef64c874e28242e58856c3b08e182.js": "/Liar-Game/precache-manifest.2a3ef64c874e28242e58856c3b08e182.js",
     "service-worker.js": "/Liar-Game/service-worker.js",
     "static/css/main.ad996443.chunk.css.map": "/Liar-Game/static/css/main.ad996443.chunk.css.map"
   }
