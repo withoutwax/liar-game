@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Liar-Game/static/css/main.ad996443.chunk.css",
-    "main.js": "/Liar-Game/static/js/main.8cacf127.chunk.js",
-    "main.js.map": "/Liar-Game/static/js/main.8cacf127.chunk.js.map",
+    "main.js": "/Liar-Game/static/js/main.0d7b047d.chunk.js",
+    "main.js.map": "/Liar-Game/static/js/main.0d7b047d.chunk.js.map",
     "runtime~main.js": "/Liar-Game/static/js/runtime~main.8069a201.js",
     "runtime~main.js.map": "/Liar-Game/static/js/runtime~main.8069a201.js.map",
-    "static/js/2.10e57578.chunk.js": "/Liar-Game/static/js/2.10e57578.chunk.js",
-    "static/js/2.10e57578.chunk.js.map": "/Liar-Game/static/js/2.10e57578.chunk.js.map",
+    "static/js/2.0acdaad6.chunk.js": "/Liar-Game/static/js/2.0acdaad6.chunk.js",
+    "static/js/2.0acdaad6.chunk.js.map": "/Liar-Game/static/js/2.0acdaad6.chunk.js.map",
     "index.html": "/Liar-Game/index.html",
-    "precache-manifest.a3ed6cd42d1e78be5ee2ee24b2353cc6.js": "/Liar-Game/precache-manifest.a3ed6cd42d1e78be5ee2ee24b2353cc6.js",
+    "precache-manifest.f9799d7686a4c831d5a4041493460d10.js": "/Liar-Game/precache-manifest.f9799d7686a4c831d5a4041493460d10.js",
     "service-worker.js": "/Liar-Game/service-worker.js",
     "static/css/main.ad996443.chunk.css.map": "/Liar-Game/static/css/main.ad996443.chunk.css.map"
   }
