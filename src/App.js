@@ -6,6 +6,11 @@ import Intro from './Components/Intro';
 import Setting from './Components/Setting';
 import Game from './Components/Game';
 
+import ReactGoogleAnalytics from 'react-ga';
+
+ReactGoogleAnalytics.initialize('UA-45795165-2');
+ReactGoogleAnalytics.pageview('/');
+
 class App extends React.Component {
   constructor(props) {
     super(props);
