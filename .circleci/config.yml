@@ -21,10 +21,8 @@ jobs:
 #       - checkout
 #       - run: echo "Deploying to gh-pages"
 #       - run: yarn run deploy
-# workflows:
-#   version: 2
-#   build_deploy:
-#     jobs:
-#       - build
-#       - deploy:
-#         requires: -build
+workflows:
+  version: 2
+  sample:
+    jobs:
+      - sample
