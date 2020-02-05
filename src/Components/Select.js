@@ -63,6 +63,7 @@ class Select extends React.Component {
     let chooseLiar = Math.floor(Math.random() * this.state.playerNum);
     let chooseSpies = [];
 
+    // eslint-disable-next-line
     while (chooseSpies.length != this.state.spyNumber) {
       let spyIndex = Math.floor(Math.random() * this.state.playerNum);
 
@@ -91,18 +92,20 @@ class Select extends React.Component {
 
     if (card.includes("no-liar")) {
       this.setState({
-        displayStatus: `당신은 라이어가 아닙니다. 이번에 선택된 단어는:`,
+        displayStatus: `이번에 선택된 단어는:`,
         playerState: false
       });
     } else if (card.includes("spy")) {
       this.setState({
-        displayStatus: `당신은 <span className="red">스파이</span>입니다. 이번에 선택된 단어는:`,
-        playerState: false
+        displayStatus: `당신은`,
+        playerState: true,
+        spyState: true
       });
     } else {
       this.setState({
         displayStatus: `당신은`,
-        playerState: true
+        playerState: true,
+        spyState: false
       });
     }
 
@@ -197,14 +200,24 @@ class Select extends React.Component {
       this.state.buttonDisabled.length > 0 &&
       this.state.showCardStatus === true
     ) {
-      textView = this.state.playerState ? (
-        <span className="red">라이어 입니다.</span>
-      ) : (
-        <span className="green">
-          <br />
-          {this.state.vocab}
-        </span>
-      );
+      if (this.state.playerState) {
+        textView = this.state.spyState ? (
+          <span>
+            <span className="red">스파이</span> 입니다. 이번에 선택된 단어는:
+            <br />
+            <span className="green">{this.state.vocab}</span>
+          </span>
+        ) : (
+          <span className="red">라이어 입니다.</span>
+        );
+      } else {
+        textView = (
+          <span className="green">
+            <br />
+            {this.state.vocab}
+          </span>
+        );
+      }
     } else {
       textView = null;
     }

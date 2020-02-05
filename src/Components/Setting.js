@@ -111,16 +111,20 @@ class Setting extends React.Component {
     // console.log(themeButton);
     let spyModeSelect =
       this.state.spyMode && this.state.playerNum >= 5 ? (
-        <select value={this.state.value} onChange={this.setSpyNumber}>
-          <option value="1">1</option>
-          {this.state.playerNum >= 8 ? <option value="2">2</option> : ""}
-          {this.state.playerNum >= 12 ? <option value="3">3</option> : ""}
-          {this.state.playerNum >= 15 ? <option value="4">4</option> : ""}
-          {this.state.playerNum >= 18 ? <option value="5">5</option> : ""}
-        </select>
+        <label className="spy-num">
+          <select value={this.state.value} onChange={this.setSpyNumber}>
+            <option value="1">1</option>
+            {this.state.playerNum >= 8 ? <option value="2">2</option> : ""}
+            {this.state.playerNum >= 12 ? <option value="3">3</option> : ""}
+            {this.state.playerNum >= 15 ? <option value="4">4</option> : ""}
+            {this.state.playerNum >= 18 ? <option value="5">5</option> : ""}
+          </select>
+        </label>
       ) : (
         ""
       );
+
+    let spyModeToggle = this.state.playerNum >= 5 ? "" : "disabled";
 
     return (
       <section className="setting-container">
@@ -167,15 +171,21 @@ class Setting extends React.Component {
             <span className="caption" style={{ fontSize: 1 + "rem" }}>
               **스파이 모드는 5명 이상일 경우 가능합니다!**
             </span>
-            {`스파이 모드: ${this.state.spyMode}`}
-            <input
-              name="spyMode"
-              type="checkbox"
-              checked={this.state.spyMode}
-              onChange={this.spyModeSelect}
-            />
+            <br />
+            <div className={`spyNumSelect ${spyModeToggle}`}>
+              스파이 모드:
+              {/* {`스파이 모드: ${this.state.spyMode}`} */}
+              <input
+                name="spyMode"
+                type="checkbox"
+                checked={this.state.spyMode}
+                onChange={this.spyModeSelect}
+                disabled={spyModeToggle}
+              />
+            </div>
+            <br />
             {spyModeSelect}
-            {`스파이: ${this.state.spyNumber}`}
+            {/* {`스파이: ${this.state.spyNumber}`} */}
           </label>
         </form>
 
