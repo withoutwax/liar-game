@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Liar-Game/precache-manifest.2a3ef64c874e28242e58856c3b08e182.js"
+  "/Liar-Game/precache-manifest.e4c9c85898369b52e1c02a759b91c2cb.js"
 );
 
 self.addEventListener('message', (event) => {
