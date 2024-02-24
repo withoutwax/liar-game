@@ -11,7 +11,7 @@ const Select = (props) => {
     playerNum,
     spyMode,
     spyNumber,
-    apiData,
+    dbData,
     theme,
     easterEgg,
     setEasterEgg,
@@ -39,9 +39,7 @@ const Select = (props) => {
     // If the API is not present
     let chosenTheme;
     let data;
-    console.log("theme", theme);
-    if (apiData === null) {
-      console.log("foodData", foodData);
+    if (dbData === null) {
       chosenTheme = {
         food: foodData,
         place: placeData,
@@ -51,9 +49,8 @@ const Select = (props) => {
       };
       data = chosenTheme[theme || "food"].kr;
     } else {
-      console.log("apiData", apiData);
-      for (let i = 0; i < apiData.data.length; i++) {
-        let words = apiData.data[i];
+      for (let i = 0; i < dbData.length; i++) {
+        let words = dbData[i];
         if (words.type === (theme || "food")) {
           chosenTheme = words.kr;
         }
@@ -61,7 +58,6 @@ const Select = (props) => {
       data = chosenTheme;
     }
 
-    console.log("data", data);
     setSelectData(data);
     generateRandomNumber(data);
   }, []);

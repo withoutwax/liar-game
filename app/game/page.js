@@ -15,7 +15,7 @@ export default function Game() {
     theme,
     easterEgg,
     setEasterEgg,
-    apiData,
+    dbData,
   } = useGameContext();
 
   const [stage, setStage] = useState(1);
@@ -49,7 +49,7 @@ export default function Game() {
             spyMode,
             spyNumber,
             theme,
-            apiData,
+            dbData,
           }}
           nextStage={progressNextStage}
           setVocab={updateGlobalVocab}
@@ -90,7 +90,7 @@ export default function Game() {
             spyMode,
             spyNumber,
             theme,
-            apiData,
+            dbData,
           }}
           nextStage={progressNextStage}
           setVocab={updateGlobalVocab}

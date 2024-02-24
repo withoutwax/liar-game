@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useGameContext } from "@/components/GameContextWrapper";
 import Link from "next/link";
 
@@ -14,37 +14,17 @@ export default function Settings() {
     setSpyMode,
     spyNumber,
     setSpyNumber,
-    theme,
     setTheme,
     themeKr,
     easterEgg,
-    setEasterEgg,
-    apiData,
-    setApiData,
+    dbData,
   } = useGameContext();
-
-  useEffect(() => {
-    if (easterEgg !== "") {
-      setEasterEgg(easterEgg);
-    }
-
-    // Get data from API
-    getDataFromDb();
-  }, []);
-
-  const getDataFromDb = () => {
-    fetch("https://liar-game-api.withoutwax.now.sh/api/getData")
-      .then((data) => data.json())
-      .then((res) => {
-        setApiData(res);
-      });
-  };
 
   let themeButton = [];
   // After apiData state has value from the API
-  if (apiData) {
-    themeButton = apiData.data.map((theme) => {
-      return theme.easterEgg === "false" || theme.easterEgg === easterEgg ? (
+  if (dbData) {
+    themeButton = dbData.map((theme) => {
+      return theme.easterEgg === false || theme.easterEgg === easterEgg ? (
         <Link
           href="/game"
           onClick={() => setTheme(theme.type)}
@@ -168,8 +148,6 @@ export default function Settings() {
           })}
         </div>
       </div>
-
-      {/* <div>{startGameButton}</div> */}
     </section>
   );
 }
