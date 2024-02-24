@@ -1,7 +1,9 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { GameContextWrapper } from "@/components/GameContextWrapper";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
+const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -19,6 +21,7 @@ export default function RootLayout({ children }) {
           <div className="max-w-lg mx-auto">{children}</div>
         </GameContextWrapper>
       </body>
+      <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
     </html>
   );
 }
