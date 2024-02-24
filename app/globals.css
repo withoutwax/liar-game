@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean");
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -24,80 +26,78 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  font-family: "Do Hyeon", sans-serif;
+  margin: 0px;
+  font-size: calc(10px + 2vmin);
+}
+
+@layer base {
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 1.3rem;
+  }
+  a {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #5b6578;
+    padding: 0.8em 2em;
+    border-radius: 5px;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  button {
+    color: #ffffff;
+    padding: 2em;
+    margin: 1em;
+    background-color: #5b6578;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  select {
+    background-color: transparent;
+    border: #ffffff solid 2px;
+    color: #ffffff;
+    width: 100%;
+    height: 40px;
+
+    font-size: 1.2rem;
+  }
+  input[type="checkbox"] {
+    -webkit-appearance: none;
+    height: 18px;
+    width: 18px;
+    margin: auto 0.8rem;
+    border: 1px solid white;
+    border-radius: 4px;
+
+    &:checked {
+      background-color: red;
+    }
+  }
+  span {
+    font-size: 1.8rem;
+
+    &.caption {
+      color: red;
+    }
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
-}
-
-/* @import url("https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean"); */
-
-body {
-  font-family: "Do Hyeon", sans-serif;
-  margin: 0px;
-  font-size: calc(10px + 2vmin);
-}
-h1 {
-  font-size: 3rem;
-}
-h2 {
-  font-size: 2rem;
-}
-a {
-  color: #ffffff;
-  text-decoration: none;
-  background-color: #5b6578;
-  padding: 0.8em 2em;
-  border-radius: 5px;
-
-  &:hover {
-    opacity: 0.5;
+  .green {
+    color: green;
   }
-}
-
-button {
-  color: #ffffff;
-  padding: 2em;
-  margin: 1em;
-  background-color: #5b6578;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-select {
-  background-color: transparent;
-  border: #ffffff solid 2px;
-  color: #ffffff;
-  width: 100%;
-  height: 40px;
-
-  font-size: 1.2rem;
-}
-input[type="checkbox"] {
-  -webkit-appearance: none;
-  height: 18px;
-  width: 18px;
-  margin: auto 0.8rem;
-  border: 1px solid white;
-  border-radius: 4px;
-
-  &:checked {
-    background-color: red;
-  }
-}
-span {
-  font-size: 1.8rem;
-
-  &.caption {
+  .red {
     color: red;
   }
-}
-.green {
-  color: green;
-}
-.red {
-  color: red;
 }

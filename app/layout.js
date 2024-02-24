@@ -15,7 +15,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${inter.className} text-center p-8 bg-gray-800 min-h-screen flex flex-col items-center justify-center text-white font-sans`}
       >
-        <GameContextWrapper>{children}</GameContextWrapper>
+        <GameContextWrapper>
+          <div className="max-w-lg mx-auto">{children}</div>
+        </GameContextWrapper>
       </body>
     </html>
   );

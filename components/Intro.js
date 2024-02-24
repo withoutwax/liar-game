@@ -3,9 +3,9 @@ import PackageJson from "@/package.json";
 import Link from "next/link";
 
 const Intro = () => {
-  const [headlineText, setHeadlineText] = useState("Game");
+  const [headlineText] = useState("Game");
   const [easterEggMode, setEasterEggMode] = useState(false);
-  const [code01, setCode01] = useState("onnuri");
+  const [code01] = useState("onnuri");
   const [codeActivated, setCodeActivated] = useState(false);
   const [codeActivatedText, setCodeActivatedText] = useState("");
 
@@ -25,13 +25,16 @@ const Intro = () => {
 
   return (
     <section className="text-center flex flex-col">
-      <h1 className="text-5xl my-1 mx-0">
-        Liar <span onClick={easterEgg}>{headlineText}</span>
+      <h1 className="my-1 mx-0">
+        Liar{" "}
+        <span className="text-[2.5rem]" onClick={easterEgg}>
+          {headlineText}
+        </span>
       </h1>
       <p className="mb-8">누가 거짓말을 하고 있을까요?</p>
       {easterEggMode ? (
         <input
-          className="easterEggInput"
+          className="easterEggInput mb-6 rounded-md text-base p-2"
           placeholder="코드를 입력하세요"
           onChange={specialCode}
         ></input>

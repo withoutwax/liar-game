@@ -40,26 +40,19 @@ export default function Settings() {
       });
   };
 
-  // Display 게임 시작! button when the user chooses the theme.
-  let startGameButton =
-    theme !== "" ? (
-      <Link href="/game">게임시작!</Link>
-    ) : (
-      `` // Empty string
-    );
-
   let themeButton = [];
   // After apiData state has value from the API
   if (apiData) {
     themeButton = apiData.data.map((theme) => {
       return theme.easterEgg === "false" || theme.easterEgg === easterEgg ? (
-        <button
-          value={theme.type}
+        <Link
+          href="/game"
           onClick={() => setTheme(theme.type)}
           key={theme.type}
+          className="inline-block border border-white text-lg hover:opacity-75"
         >
           {theme.typeKr}
-        </button>
+        </Link>
       ) : (
         "" // Empty string
       );
@@ -85,14 +78,15 @@ export default function Settings() {
       "" // Empty string
     );
 
-  let spyModeToggle = playerNum >= 5 ? "" : "disabled";
+  let spyModeToggle =
+    playerNum >= 5 ? "" : "opacity-50 cursor-not-allowed pointer-events-none";
 
   return (
-    <section className="text-center flex flex-col">
+    <section className="text-center flex flex-col space-y-4">
       <h1>설정 창</h1>
 
       <form className="flex flex-col items-center">
-        <label className="m4">
+        <label className="m-4 space-y-4">
           <h2>참여인원:</h2>
           <select
             value={playerNum}
@@ -119,7 +113,7 @@ export default function Settings() {
             <option value="20">20</option>
           </select>
         </label>
-        <label className="set-timer">
+        <label className="set-timer m-4 space-y-4">
           <h2>제한시간:</h2>
           <select
             value={timer}
@@ -141,9 +135,7 @@ export default function Settings() {
             **스파이 모드는 5명 이상일 경우 가능합니다!**
           </span>
           <br />
-          <div
-            className={`spyNumSelect disabled:opacity-50 disabled:cursor-not-allowed ${spyModeToggle}`}
-          >
+          <div className={`spyNumSelect ${spyModeToggle}`}>
             스파이 모드:
             <input
               name="spyMode"
@@ -170,12 +162,14 @@ export default function Settings() {
 
       <div className="m-4">
         <h2>주제: {`${themeKr}`}</h2>
-        {themeButton.map((button) => {
-          return button;
-        })}
+        <div className="grid grid-cols-2 gap-4 mt-8">
+          {themeButton.map((button) => {
+            return button;
+          })}
+        </div>
       </div>
 
-      <div>{startGameButton}</div>
+      {/* <div>{startGameButton}</div> */}
     </section>
   );
 }
