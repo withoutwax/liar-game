@@ -85,7 +85,7 @@ export default function Settings() {
         <select
           value={spyNumber}
           onChange={(event) => setSpyNumber(event.target.value)}
-          className="w-24 text-black"
+          className="w-24"
         >
           <option value="1">1</option>
           {playerNum >= 8 ? <option value="2">2</option> : ""}
