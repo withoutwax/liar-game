@@ -40,19 +40,6 @@ export default function Settings() {
       });
   };
 
-  // const updateGlobalState = () => {
-  //   props.parentCallbackState({
-  //     playerNum,
-  //     timer,
-  //     spyMode,
-  //     spyNumber,
-  //     theme,
-  //     themeKr,
-  //     easterEgg,
-  //     apiData,
-  //   });
-  // };
-
   // Display 게임 시작! button when the user chooses the theme.
   let startGameButton =
     theme !== "" ? (

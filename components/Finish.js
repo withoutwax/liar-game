@@ -56,8 +56,6 @@ const Finish = ({ liarStatus, vocab, theme, selectData }) => {
 
   let newGame = <Link href="/settings">새 게임하기</Link>;
 
-  //   console.log(liarGuess);
-
   let headerColor = "white";
   if (liarGuess) {
     headerColor = liarWin ? "green" : "red";

@@ -28,7 +28,6 @@ const Timer = ({ timerCheck }) => {
     }
   }, [seconds]); // This effect runs whenever `seconds` changes
 
-  //   console.log({ seconds, unlimited });
   let timerColor = seconds <= 20 ? "red" : "";
 
   return (
