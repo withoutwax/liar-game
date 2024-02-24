@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean");
+
+$font-do-hyeon: "Do Hyeon", sans-serif;
+
+$white: #ffffff;
+$dark-blue: #282c34;
+$light-blue: #5b6578;
+$red: red;
+$green: green;
+
+body {
+  font-family: $font-do-hyeon;
+  margin: 0px;
+  font-size: calc(10px + 2vmin);
+}
+h1 {
+  font-size: 3rem;
+}
+h2 {
+  font-size: 2rem;
+}
+a {
+  color: $white;
+  text-decoration: none;
+  background-color: $light-blue;
+  padding: 0.8em 2em;
+  border-radius: 5px;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+button {
+  color: $white;
+  padding: 2em;
+  margin: 1em;
+  background-color: $light-blue;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+select {
+  background-color: transparent;
+  border: $white solid 2px;
+  color: $white;
+  width: 100%;
+  height: 40px;
+
+  font-size: 1.2rem;
+}
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  height: 18px;
+  width: 18px;
+  margin: auto 0.8rem;
+  border: 1px solid white;
+  border-radius: 4px;
+
+  &:checked {
+    background-color: red;
+  }
+}
+span {
+  font-size: 1.8rem;
+
+  &.caption {
+    color: $red;
+  }
+}
+.green {
+  color: $green;
+}
+.red {
+  color: $red;
+}

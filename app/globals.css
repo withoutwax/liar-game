@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@import url("https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean");
+
+body {
+  font-family: "Do Hyeon", sans-serif;
+  margin: 0px;
+  font-size: calc(10px + 2vmin);
+}
+h1 {
+  font-size: 3rem;
+}
+h2 {
+  font-size: 2rem;
+}
+a {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #5b6578;
+  padding: 0.8em 2em;
+  border-radius: 5px;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+button {
+  color: #ffffff;
+  padding: 2em;
+  margin: 1em;
+  background-color: #5b6578;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+select {
+  background-color: transparent;
+  border: #ffffff solid 2px;
+  color: #ffffff;
+  width: 100%;
+  height: 40px;
+
+  font-size: 1.2rem;
+}
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  height: 18px;
+  width: 18px;
+  margin: auto 0.8rem;
+  border: 1px solid white;
+  border-radius: 4px;
+
+  &:checked {
+    background-color: red;
+  }
+}
+span {
+  font-size: 1.8rem;
+
+  &.caption {
+    color: red;
+  }
+}
+.green {
+  color: green;
+}
+.red {
+  color: red;
+}
