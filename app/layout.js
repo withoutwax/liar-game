@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { GameContextWrapper } from "@/components/GameContextWrapper";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/react";
 
 const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
 const inter = Inter({ subsets: ["latin"] });
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
         <GameContextWrapper>
           <div className="max-w-lg mx-auto">{children}</div>
         </GameContextWrapper>
+        <Analytics />
       </body>
       <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
     </html>
