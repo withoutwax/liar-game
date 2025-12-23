@@ -1,8 +1,8 @@
+@import url("https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url("https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean");
 
 :root {
   --foreground-rgb: 0, 0, 0;
