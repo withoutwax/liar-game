@@ -3,23 +3,23 @@ import PackageJson from "@/package.json";
 import Link from "next/link";
 
 const Intro = () => {
-  const [headlineText] = useState("Game");
-  const [easterEggMode, setEasterEggMode] = useState(false);
-  const [code01] = useState("onnuri");
-  const [codeActivated, setCodeActivated] = useState(false);
-  const [codeActivatedText, setCodeActivatedText] = useState("");
+  const [headlineText] = useState<string>("Game");
+  const [easterEggMode, setEasterEggMode] = useState<boolean>(false);
+  const [code01] = useState<string>("onnuri");
+  const [codeActivated, setCodeActivated] = useState<boolean>(false);
+  const [codeActivatedText, setCodeActivatedText] = useState<string>("");
 
   const easterEgg = () => {
     console.log("You have discovered an Easter Egg 🥚 !");
     setEasterEggMode(true);
   };
 
-  const specialCode = (input) => {
+  const specialCode = (input: React.ChangeEvent<HTMLInputElement>) => {
     if (input.target.value === code01) {
       console.log("Activated");
       setCodeActivated(true);
       setCodeActivatedText("온누리 모드 Activated");
-      this.props.parentCallbackEasterEgg(code01);
+      // this.props.parentCallbackEasterEgg(code01); // Removed as it is not used in parent
     }
   };
 

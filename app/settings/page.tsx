@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useGameContext } from "./GameContextWrapper";
+"use client";
 
-export const Settings = () => {
+// import { useEffect } from "react";
+import { useGameContext } from "@/components/GameContextWrapper";
+import Link from "next/link";
+
+export default function Settings() {
   const {
     playerNum,
     setPlayerNum,
@@ -11,64 +14,25 @@ export const Settings = () => {
     setSpyMode,
     spyNumber,
     setSpyNumber,
-    theme,
     setTheme,
     themeKr,
-    setThemeKr,
     easterEgg,
-    setEasterEgg,
-    apiData,
-    setApiData,
+    dbData,
   } = useGameContext();
 
-  useEffect(() => {
-    if (easterEgg !== "") {
-      setEasterEgg(easterEgg);
-    }
-
-    // Get data from API
-    getDataFromDb();
-  }, []);
-
-  const getDataFromDb = () => {
-    fetch("https://liar-game-api.withoutwax.now.sh/api/getData")
-      .then((data) => data.json())
-      .then((res) => {
-        setApiData(res);
-      });
-  };
-
-  const updateGlobalState = () => {
-    props.parentCallbackState({
-      playerNum,
-      timer,
-      spyMode,
-      spyNumber,
-      theme,
-      themeKr,
-      easterEgg,
-      apiData,
-    });
-  };
-
-  // Display 게임 시작! button when the user chooses the theme.
-  let startGameButton =
-    theme !== "" ? (
-      <Link to="/game" onClick={updateGlobalState}>
-        게임시작!
-      </Link>
-    ) : (
-      `` // Empty string
-    );
-
-  let themeButton = [];
+  let themeButton: React.ReactNode[] = [];
   // After apiData state has value from the API
-  if (apiData) {
-    themeButton = apiData.data.map((theme) => {
-      return theme.easterEgg === "false" || theme.easterEgg === easterEgg ? (
-        <button value={theme.type} onClick={setTheme} key={theme.type}>
+  if (dbData) {
+    themeButton = dbData.map((theme: any) => {
+      return theme.easterEgg === false || theme.easterEgg === easterEgg ? (
+        <Link
+          href="/game"
+          onClick={() => setTheme(theme.type)}
+          key={theme.type}
+          className="inline-block border border-white text-lg hover:opacity-75"
+        >
           {theme.typeKr}
-        </button>
+        </Link>
       ) : (
         "" // Empty string
       );
@@ -77,10 +41,13 @@ export const Settings = () => {
 
   let spyModeSelect =
     spyMode && playerNum >= 5 ? (
-      <label className="spy-num">
+      <label className="mt-8">
         <select
           value={spyNumber}
-          onChange={(event) => setSpyNumber(event.target.value)}
+          onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+            setSpyNumber(Number(event.target.value))
+          }
+          className="w-24"
         >
           <option value="1">1</option>
           {playerNum >= 8 ? <option value="2">2</option> : ""}
@@ -93,18 +60,23 @@ export const Settings = () => {
       "" // Empty string
     );
 
-  let spyModeToggle = playerNum >= 5 ? "" : "disabled";
+  let spyModeClass =
+    playerNum >= 5 ? "" : "opacity-50 cursor-not-allowed pointer-events-none";
+  let isSpyModeDisabled = playerNum < 5;
 
   return (
-    <section className="setting-container">
+    <section className="text-center flex flex-col space-y-4">
       <h1>설정 창</h1>
 
-      <form className="setting-form">
-        <label className="player-num">
+      <form className="flex flex-col items-center">
+        <label className="m-4 space-y-4">
           <h2>참여인원:</h2>
           <select
             value={playerNum}
-            onChange={(event) => setPlayerNum(Number(event.target.value))}
+            onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+              setPlayerNum(Number(event.target.value))
+            }
+            className=""
           >
             <option value="3">3</option>
             <option value="4">4</option>
@@ -126,11 +98,14 @@ export const Settings = () => {
             <option value="20">20</option>
           </select>
         </label>
-        <label className="set-timer">
+        <label className="set-timer m-4 space-y-4">
           <h2>제한시간:</h2>
           <select
             value={timer}
-            onChange={(event) => setTimer(event.target.value)}
+            onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+              setTimer(event.target.value)
+            }
+            className=""
           >
             <option value="60">60 초</option>
             <option value="90">90 초</option>
@@ -142,29 +117,29 @@ export const Settings = () => {
             <option value="unlimited">무제한</option>
           </select>
         </label>
-        <label className="spy-mode">
+        <label className="mt-16">
           <span className="caption" style={{ fontSize: 1 + "rem" }}>
             **스파이 모드는 5명 이상일 경우 가능합니다!**
           </span>
           <br />
-          <div className={`spyNumSelect ${spyModeToggle}`}>
+          <div className={`spyNumSelect ${spyModeClass}`}>
             스파이 모드:
             <input
               name="spyMode"
               type="checkbox"
               checked={spyMode}
-              onChange={(event) => {
-                let value =
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                let value: boolean | string =
                   event.target.type === "checkbox"
                     ? event.target.checked
                     : event.target.value;
                 if (!value) {
                   setSpyNumber(0);
                 }
-                setSpyMode(value);
+                setSpyMode(Boolean(value));
                 setSpyNumber(1);
               }}
-              disabled={spyModeToggle}
+              disabled={isSpyModeDisabled}
             />
           </div>
           <br />
@@ -172,14 +147,14 @@ export const Settings = () => {
         </label>
       </form>
 
-      <div className="theme-select">
+      <div className="m-4">
         <h2>주제: {`${themeKr}`}</h2>
-        {themeButton.map((button) => {
-          return button;
-        })}
+        <div className="grid grid-cols-2 gap-4 mt-8">
+          {themeButton.map((button) => {
+            return button;
+          })}
+        </div>
       </div>
-
-      <div>{startGameButton}</div>
     </section>
   );
-};
+}

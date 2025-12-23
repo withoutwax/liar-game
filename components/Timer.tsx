@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import { useGameContext } from "@/components/GameContextWrapper";
 
-const Timer = ({ timerCheck }) => {
+interface TimerProps {
+  timerCheck: (isTimerEnded: boolean) => void;
+}
+
+const Timer = ({ timerCheck }: TimerProps) => {
   const { timer } = useGameContext();
-  const [seconds, setSeconds] = useState(60);
-  const [unlimited, setUnlimited] = useState(false);
+  const [seconds, setSeconds] = useState<number>(60);
+  const [unlimited, setUnlimited] = useState<boolean>(false);
 
   useEffect(() => {
     if (timer === "unlimited") {
@@ -13,7 +17,7 @@ const Timer = ({ timerCheck }) => {
     } else if (timer === null) {
       setSeconds(60);
     } else {
-      setSeconds(timer);
+      setSeconds(Number(timer));
     }
   }, []);
 

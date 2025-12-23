@@ -6,7 +6,13 @@ import occupationData from "@/data/occupation.json";
 import bibleCharacterData from "@/data/biblecharacter.json";
 import onnurichanyangTeamMemberData from "@/data/onnurichanyangteammember.json";
 
-const Select = (props) => {
+interface SelectProps {
+  nextStage: (stage: number) => void;
+  setVocab: (vocab: string, selectData: any) => void;
+  globalState?: any; // Apparently unused but passed
+}
+
+const Select = (props: SelectProps) => {
   const {
     playerNum,
     spyMode,
@@ -17,18 +23,20 @@ const Select = (props) => {
     setEasterEgg,
   } = useGameContext();
 
-  const [vocab, setVocab] = useState("");
-  const [liar, setLiar] = useState(1);
-  const [spy, setSpy] = useState([]);
-  const [buttonDisabled, setButtonDisabled] = useState([]);
-  const [displayStatus, setDisplayStatus] = useState("플레이어를 선택해주세요");
-  const [buttonDisabledText, setButtonDisabledText] = useState("확인했습니다!");
-  const [beginGame, setBeginGame] = useState(false);
-  const [showCardStatus, setShowCardStatus] = useState(false);
+  const [vocab, setVocab] = useState<string>("");
+  const [liar, setLiar] = useState<number>(1);
+  const [spy, setSpy] = useState<number[]>([]);
+  const [buttonDisabled, setButtonDisabled] = useState<number[]>([]);
+  const [displayStatus, setDisplayStatus] =
+    useState<string>("플레이어를 선택해주세요");
+  const [buttonDisabledText, setButtonDisabledText] =
+    useState<string>("확인했습니다!");
+  const [beginGame, setBeginGame] = useState<boolean>(false);
+  const [showCardStatus, setShowCardStatus] = useState<boolean>(false);
   // const [easterEgg, setEasterEgg] = useState("");
-  const [selectData, setSelectData] = useState(null);
-  const [playerState, setPlayerState] = useState(false);
-  const [spyState, setSpyState] = useState(false);
+  const [selectData, setSelectData] = useState<any>(null);
+  const [playerState, setPlayerState] = useState<boolean>(false);
+  const [spyState, setSpyState] = useState<boolean>(false);
 
   useEffect(() => {
     // Set Easter Egg
@@ -37,9 +45,9 @@ const Select = (props) => {
     }
 
     // If the API is not present
-    let chosenTheme;
+    let chosenTheme: any;
     let data;
-    if (dbData === null) {
+    if (dbData === null || dbData.length === 0) {
       chosenTheme = {
         food: foodData,
         place: placeData,
@@ -47,7 +55,8 @@ const Select = (props) => {
         biblecharacter: bibleCharacterData,
         onnurichanyangteammember: onnurichanyangTeamMemberData,
       };
-      data = chosenTheme[theme || "food"].kr;
+      // Type assertion or check theme key
+      data = (chosenTheme as any)[theme || "food"].kr;
     } else {
       for (let i = 0; i < dbData.length; i++) {
         let words = dbData[i];
@@ -59,13 +68,15 @@ const Select = (props) => {
     }
 
     setSelectData(data);
-    generateRandomNumber(data);
+    if (data) {
+      generateRandomNumber(data);
+    }
   }, []);
 
-  const generateRandomNumber = (data) => {
+  const generateRandomNumber = (data: string[]) => {
     let randomIndex = Math.floor(Math.random() * data.length);
     let chooseLiar = Math.floor(Math.random() * playerNum);
-    let chooseSpies = [];
+    let chooseSpies: number[] = [];
 
     while (chooseSpies.length !== spyNumber) {
       let spyIndex = Math.floor(Math.random() * playerNum);
@@ -80,14 +91,14 @@ const Select = (props) => {
     setSpy(chooseSpies);
   };
 
-  const showCard = (event) => {
-    let button = Number(event.target.id);
+  const showCard = (event: React.MouseEvent<HTMLButtonElement>) => {
+    let button = Number((event.target as HTMLButtonElement).id);
 
     if (!buttonDisabled.includes(button)) {
       setButtonDisabled([...buttonDisabled, button]);
     }
 
-    let card = event.target.className;
+    let card = (event.target as HTMLButtonElement).className;
 
     if (card.includes("no-liar")) {
       setDisplayStatus(`이번에 선택된 단어는:`);
@@ -138,7 +149,7 @@ const Select = (props) => {
           }`}
           disabled={buttonDisabled.includes(i) ? true : false}
           key={i}
-          id={i}
+          id={String(i)}
           onClick={showCard}
         >
           {defaultText}
@@ -154,7 +165,7 @@ const Select = (props) => {
           }`}
           disabled={buttonDisabled.includes(i) ? true : false}
           key={i}
-          id={i}
+          id={String(i)}
           onClick={showCard}
         >
           {defaultText}
@@ -170,7 +181,7 @@ const Select = (props) => {
           }`}
           disabled={buttonDisabled.includes(i) ? true : false}
           key={i}
-          id={i}
+          id={String(i)}
           onClick={showCard}
         >
           {defaultText}

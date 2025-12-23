@@ -2,14 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useGameContext } from "@/components/GameContextWrapper";
 import Timer from "@/components/Timer";
 
-const Play = ({ nextStage }) => {
+interface PlayProps {
+  nextStage: (stage: number) => void;
+}
+
+const Play = ({ nextStage }: PlayProps) => {
   const { timer } = useGameContext();
 
-  const [displayStatus, setDisplayStatus] = useState("게임 시작!");
-  const [displayStatus02, setDisplayStatus02] = useState(
+  const [displayStatus, setDisplayStatus] = useState<string>("게임 시작!");
+  const [displayStatus02, setDisplayStatus02] = useState<string>(
     "게임이 시작되었습니다! 라이어를 찾아주세요!"
   );
-  const [findLiar, setFindLiar] = useState(false);
+  const [findLiar, setFindLiar] = useState<boolean>(false);
 
   useEffect(() => {
     if (timer === "unlimited") {
@@ -23,7 +27,7 @@ const Play = ({ nextStage }) => {
     }
   }, []);
 
-  const checkTimerEnds = (timer) => {
+  const checkTimerEnds = (timer: any) => {
     let text = "시간이 다 되었습니다! 라이어를 지목해주세요!";
 
     setDisplayStatus(text);
@@ -31,8 +35,9 @@ const Play = ({ nextStage }) => {
     setFindLiar(true);
   };
 
-  const liarStatus = (status) => {
-    switch (status.target.value) {
+  const liarStatus = (status: React.MouseEvent<HTMLButtonElement>) => {
+    const value = (status.target as HTMLButtonElement).value;
+    switch (value) {
       case "liar-found":
         nextStage(3);
         break;

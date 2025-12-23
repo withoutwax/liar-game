@@ -18,9 +18,9 @@ export default function Game() {
     dbData,
   } = useGameContext();
 
-  const [stage, setStage] = useState(1);
-  const [vocab, setVocab] = useState("");
-  const [selectData, setSelectData] = useState(null);
+  const [stage, setStage] = useState<number>(1);
+  const [vocab, setVocab] = useState<string>("");
+  const [selectData, setSelectData] = useState<any>(null);
 
   useEffect(() => {
     if (easterEgg !== "") {
@@ -28,11 +28,11 @@ export default function Game() {
     }
   }, [easterEgg]);
 
-  const progressNextStage = (stage) => {
+  const progressNextStage = (stage: number) => {
     setStage(stage);
   };
 
-  const updateGlobalVocab = (vocab, selectData) => {
+  const updateGlobalVocab = (vocab: string, selectData: any) => {
     setVocab(vocab);
     setSelectData(selectData);
   };

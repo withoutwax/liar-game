@@ -12,7 +12,11 @@ export const metadata = {
   description: "라이어 게임을 온라인으로 즐겨보세요!",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="kr">
       <body
@@ -23,7 +27,7 @@ export default function RootLayout({ children }) {
         </GameContextWrapper>
         <Analytics />
       </body>
-      <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
+      <GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID || ""} />
     </html>
   );
 }

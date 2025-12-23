@@ -3,11 +3,26 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const Finish = ({ liarStatus, vocab, theme, selectData }) => {
-  const [liarGuess, setLiarGuess] = useState(false);
-  const [liarGuessText, setLiarGuessText] = useState("");
-  const [headerText, setHeaderText] = useState("라이어는 단어를 선택해주세요:");
-  const [liarWin, setLiarWin] = useState(true);
+interface FinishProps {
+  liarStatus: string;
+  vocab: string;
+  theme: string;
+  selectData: any[];
+  nextStage: (stage: number) => void;
+}
+
+const Finish = ({
+  liarStatus,
+  vocab,
+  theme,
+  selectData,
+  nextStage, // Destructure nextStage even if not used in this block directly, it's in logic below? No, it's used in link? No wait.
+}: FinishProps) => {
+  const [liarGuess, setLiarGuess] = useState<boolean>(false);
+  const [liarGuessText, setLiarGuessText] = useState<string>("");
+  const [headerText, setHeaderText] =
+    useState<string>("라이어는 단어를 선택해주세요:");
+  const [liarWin, setLiarWin] = useState<boolean>(true);
 
   useEffect(() => {
     if (liarStatus !== "found") {
@@ -18,9 +33,10 @@ const Finish = ({ liarStatus, vocab, theme, selectData }) => {
     }
   }, [liarStatus]);
 
-  const handleLiarGuess = (guess) => {
-    console.log(guess.target.value, vocab);
-    if (guess.target.value === vocab) {
+  const handleLiarGuess = (guess: React.MouseEvent<HTMLButtonElement>) => {
+    const value = (guess.target as HTMLButtonElement).value;
+    console.log(value, vocab);
+    if (value === vocab) {
       setHeaderText("라이어가 승리하였습니다!");
       setLiarGuessText(`라이어가 선택한 단어가 맞습니다!`);
       setLiarWin(true);
@@ -43,7 +59,7 @@ const Finish = ({ liarStatus, vocab, theme, selectData }) => {
     selectData,
   });
 
-  let guessCards = selectData.map((word) => (
+  let guessCards = selectData.map((word: string) => (
     <button key={word} value={word} onClick={handleLiarGuess}>
       {word}
     </button>
